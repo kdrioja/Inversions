@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
+        /**
         for (int i = 0; i < 50; i++) {
             ArrayList<Integer> test = createArray(8);
             printArray(test);
@@ -14,6 +15,89 @@ public class Main {
 
         test = createArray(getNumber());
         printArray(test);
+         */
+
+        ArrayList<Integer> a = new ArrayList<>();
+        a.add(10);
+        a.add(15);
+        a.add(22);
+        a.add(80);
+        a.add(90);
+        printArray(a);
+
+        ArrayList<Integer> b = new ArrayList<>();
+        b.add(5);
+        b.add(8);
+        b.add(11);
+        b.add(15);
+        b.add(70);
+        printArray(b);
+
+        ArrayList<Integer> c = new ArrayList<>();
+        System.out.println(mergeAndCount(a, b, c));
+        printArray(c);
+
+        ArrayList<Integer> example = new ArrayList<>();
+        example.add(1);
+        example.add(5);
+        example.add(4);
+        example.add(8);
+        example.add(10);
+        example.add(2);
+        printArray(example);
+        System.out.println("# inversions: " + sortAndCount(example));
+    }
+
+    public static int sortAndCount(ArrayList<Integer> array) {
+        if (array.size() <= 1)
+            return 0;
+        else {
+            int mid = array.size() / 2;
+            System.out.println("mid val: " + mid);
+            System.out.println("end: " + (array.size() - 1) + "\n");
+            ArrayList<Integer> a = new ArrayList<>(array.subList(0, mid));
+            //printArray(a);
+            ArrayList<Integer> b = new ArrayList<>(array.subList(mid + 1, array.size()));
+            //printArray(b);
+            ArrayList<Integer> c = new ArrayList<>();
+            int countA = sortAndCount(a);
+            int countB = sortAndCount(b);
+            int countC = mergeAndCount(a, b, c);
+            //printArray(c);
+            return countA + countB + countC;
+        }
+    }
+
+    public static int mergeAndCount(ArrayList<Integer> A, ArrayList<Integer> B, ArrayList<Integer> C) {
+        int count = 0;
+        int pointerA = 0, pointerB = 0;
+
+        while (pointerA < A.size() && pointerB < B.size()) {
+            if (A.get(pointerA) <= B.get(pointerB)) {
+                C.add(A.get(pointerA));
+                pointerA++;
+            }
+            else {
+                C.add(B.get(pointerB));
+                count += A.size() - pointerA;
+                pointerB++;
+            }
+        }
+
+        if (pointerA == A.size()) {
+            while (pointerB < B.size()) {
+                C.add(B.get(pointerB));
+                pointerB++;
+            }
+        }
+        else {
+            while (pointerA < A.size()) {
+                C.add(A.get(pointerA));
+                pointerA++;
+            }
+        }
+
+        return count;
     }
 
     public static ArrayList createArray(int n) {
