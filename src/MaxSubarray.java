@@ -1,13 +1,13 @@
+/**
+ * Kenia Rioja-Naranjo
+ * CSC 401
+ * Assignment 3 - Problem 4/4
+ */
+
 public class MaxSubarray {
     private int low;
     private int high;
     private int maxSum;
-
-    public MaxSubarray() {
-        this.low = -1;
-        this.high = -1;
-        this.maxSum = -1;
-    }
 
     public MaxSubarray(int low, int high, int maxSum) {
         this.low = low;
