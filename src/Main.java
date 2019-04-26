@@ -1,53 +1,8 @@
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        /**
-        for (int i = 0; i < 50; i++) {
-            ArrayList<Integer> test = createArray(8);
-            printArray(test);
-        }
-
-        ArrayList<Integer> test = createArray(15);
-        printArray(test);
-
-        test = createArray(getNumber());
-        printArray(test);
-         */
-        /**
-        ArrayList<Integer> a = new ArrayList<>();
-        a.add(10);
-        a.add(15);
-        a.add(22);
-        a.add(80);
-        a.add(90);
-        printArray(a);
-
-        ArrayList<Integer> b = new ArrayList<>();
-        b.add(5);
-        b.add(8);
-        b.add(11);
-        b.add(15);
-        b.add(70);
-        printArray(b);
-
-        ArrayList<Integer> c = new ArrayList<>();
-        System.out.println(mergeAndCount(a, b, c));
-        printArray(c);
-        */
-        /**
-         ArrayList<Integer> example = new ArrayList<>();
-         example.add(1);
-         example.add(5);
-         example.add(4);
-         example.add(8);
-         example.add(10);
-         example.add(2);
-         printArray(example);
-         System.out.println("# inversions: " + sortAndCount(example));
-         */
-
+        
         int[] left = {10, 15, 22, 80, 90};
         int[] right = {5, 8, 11, 15, 70};
         int[] merged = new int[left.length + right.length];
@@ -55,7 +10,57 @@ public class Main {
         printArray(merged);
 
         int[] orig = {1, 5, 4, 8, 10, 2, 6, 9, 12, 11, 3, 7};
-        printArray(sortAndCount(orig));
+        //printArray(sortAndCount(orig));
+
+        int[] maxsub = {3, -1, 5, 2, 1, -6};
+        MaxSubarray m = findMaxCrossing(maxsub, 0, 2, 5);
+        m.print();
+
+    }
+
+    public static int findMaxSubarray(int[] array, int low, int high) {
+        if (low == high)
+            return array[low];
+
+        else {
+            int middle = (low + high) / 2;
+
+            int leftMax = findMaxSubarray(array, low, middle);
+            int rightMax = findMaxSubarray(array, middle + 1, high);
+            //int crossMax = findMaxCrossing(array, low, middle, high);
+
+            return 1;
+        }
+    }
+
+    public static MaxSubarray findMaxCrossing(int[] array, int low, int middle, int high) {
+        int leftSum = Integer.MIN_VALUE;
+        int sum = 0;
+        int leftIndex = -1;
+
+        for (int i = middle; i >= low; i--) {
+            sum += array[i];
+
+            if (sum > leftSum) {
+                leftSum = sum;
+                leftIndex = i;
+            }
+        }
+
+        int rightSum = Integer.MIN_VALUE;
+        sum = 0;
+        int rightIndex = -1;
+
+        for (int i = middle + 1; i <= high; i++) {
+            sum += array[i];
+
+            if (sum > rightSum) {
+                rightSum = sum;
+                rightIndex = i;
+            }
+        }
+
+        return new MaxSubarray(leftIndex, rightIndex, leftSum + rightSum);
     }
 
     public static int getNumber() {
