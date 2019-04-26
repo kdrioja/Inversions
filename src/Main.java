@@ -8,34 +8,13 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-
-        /*
-        int[] left = {10, 15, 22, 80, 90};
-        int[] right = {5, 8, 11, 15, 70};
-        int[] merged = new int[left.length + right.length];
-        System.out.println(mergeAndCount(left, right, merged));
-        printArray(merged);
-        */
-
-        /*
-        int[] orig = {1, 5, 4, 8, 10, 2, 6, 9, 12, 11, 3, 7};
-        System.out.println("# of inversion: " + sortAndCount(orig));
-        printArray(orig);
-        */
-
-        /*
-        int[] maxSub = {3, -1, 5, 2, 1, -6};
-        MaxSubarray m = findMaxSubarray(maxSub, 0, 5);
-        m.print();
-
-        int[] test = {-2, -4, 3, -1, 5, 7, -7, -1};
-        MaxSubarray t = findMaxSubarray(test, 0, test.length - 1);
-        t.print();
-
-        int[] reck = {13, -3, -25, 20, -3, -16, -23, 18, 20, -7, 12, -5, -22, 15, -4, 7};
-        MaxSubarray r = findMaxSubarray(reck, 0, reck.length - 1);
-        r.print();
-        */
+        int[] array = createArray(getNumber());
+        System.out.print("Array: ");
+        printArray(array);
+        MaxSubarray max = findMaxSubarray(array, 0, array.length - 1);
+        max.print();
+        System.out.print("Total number of inversions: " + sortAndCount(array) + "\nSorted array: ");
+        printArray(array);
     }
 
 
@@ -95,7 +74,7 @@ public class Main {
         int num;
         Scanner scanner = new Scanner(System.in);
 
-        System.out.print("Enter an integer: ");
+        System.out.print("Enter a positive integer: ");
         num = scanner.nextInt();
 
         while (num < 1) {
