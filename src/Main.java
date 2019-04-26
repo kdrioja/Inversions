@@ -2,18 +2,18 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        
+
         int[] left = {10, 15, 22, 80, 90};
         int[] right = {5, 8, 11, 15, 70};
         int[] merged = new int[left.length + right.length];
         System.out.println(mergeAndCount(left, right, merged));
         printArray(merged);
 
-        int[] orig = {1, 5, 4, 8, 10, 2, 6, 9, 12, 11, 3, 7};
+        //int[] orig = {1, 5, 4, 8, 10, 2, 6, 9, 12, 11, 3, 7};
         //printArray(sortAndCount(orig));
 
-        int[] maxsub = {3, -1, 5, 2, 1, -6};
-        MaxSubarray m = findMaxCrossing(maxsub, 0, 2, 5);
+        int[] maxSub = {3, -1, 5, 2, 1, -6};
+        MaxSubarray m = findMaxCrossing(maxSub, 0, 2, 5);
         m.print();
 
     }
