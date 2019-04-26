@@ -13,23 +13,35 @@ public class Main {
         //printArray(sortAndCount(orig));
 
         int[] maxSub = {3, -1, 5, 2, 1, -6};
-        MaxSubarray m = findMaxCrossing(maxSub, 0, 2, 5);
+        MaxSubarray m = findMaxSubarray(maxSub, 0, 5);
         m.print();
 
+        int[] test = {-2, -4, 3, -1, 5, 7, -7, -1};
+        MaxSubarray t = findMaxSubarray(test, 0, test.length - 1);
+        t.print();
+
+        int[] reck = {13, -3, -25, 20, -3, -16, -23, 18, 20, -7, 12, -5, -22, 15, -4, 7};
+        MaxSubarray r = findMaxSubarray(reck, 0, reck.length - 1);
+        r.print();
     }
 
-    public static int findMaxSubarray(int[] array, int low, int high) {
+    public static MaxSubarray findMaxSubarray(int[] array, int low, int high) {
         if (low == high)
-            return array[low];
+            return new MaxSubarray(low, high, array[low]);
 
         else {
             int middle = (low + high) / 2;
 
-            int leftMax = findMaxSubarray(array, low, middle);
-            int rightMax = findMaxSubarray(array, middle + 1, high);
-            //int crossMax = findMaxCrossing(array, low, middle, high);
+            MaxSubarray left = findMaxSubarray(array, low, middle);
+            MaxSubarray right = findMaxSubarray(array, middle + 1, high);
+            MaxSubarray cross = findMaxCrossing(array, low, middle, high);
 
-            return 1;
+            if (left.getMaxSum() > right.getMaxSum() && left.getMaxSum() > cross.getMaxSum())
+                return left;
+            else if (right.getMaxSum() > left.getMaxSum() && right.getMaxSum() > cross.getMaxSum())
+                return right;
+            else
+                return cross;
         }
     }
 
@@ -175,40 +187,6 @@ public class Main {
     }
 
     /*
-    public static int mergeAndCount(ArrayList<Integer> A, ArrayList<Integer> B, ArrayList<Integer> C) {
-        int count = 0;
-        int pointerA = 0, pointerB = 0;
-
-        while (pointerA < A.size() && pointerB < B.size()) {
-            if (A.get(pointerA) <= B.get(pointerB)) {
-                C.add(A.get(pointerA));
-                pointerA++;
-            }
-            else {
-                C.add(B.get(pointerB));
-                count += A.size() - pointerA;
-                pointerB++;
-            }
-        }
-
-        if (pointerA == A.size()) {
-            while (pointerB < B.size()) {
-                C.add(B.get(pointerB));
-                pointerB++;
-            }
-        }
-        else {
-            while (pointerA < A.size()) {
-                C.add(A.get(pointerA));
-                pointerA++;
-            }
-        }
-
-        return count;
-    }
-    */
-
-    /*
     public static int sortAndCount(ArrayList<Integer> array) {
         if (array.size() <= 1)
             return 0;
@@ -227,17 +205,6 @@ public class Main {
             printArray(c);
             return countA + countB + countC;
         }
-    }
-    */
-
-    /*
-    public static void printArray(ArrayList<Integer> array) {
-        //System.out.println(array.size());
-        System.out.print("[");
-        for (int i = 0; i < array.size() - 1; i++) {
-            System.out.print(array.get(i) + ", ");
-        }
-        System.out.print(array.get(array.size() - 1) + "]\n");
     }
     */
 }
