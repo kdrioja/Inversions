@@ -9,7 +9,7 @@ public class MaxSubarray {
     private int high;
     private int maxSum;
 
-    
+
     public MaxSubarray(int low, int high, int maxSum) {
         this.low = low;
         this.high = high;

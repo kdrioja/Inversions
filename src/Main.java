@@ -15,6 +15,9 @@ public class Main {
         max.print();
         System.out.print("Total number of inversions: " + sortAndCount(array) + "\nSorted array: ");
         printArray(array);
+
+
+        //
     }
 
 
